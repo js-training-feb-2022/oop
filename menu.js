@@ -1,25 +1,16 @@
 "use strict";
 
-const DRINKS = {
-    COFFEE: { price: 50, calories: 40 },
-    COLA: { price: 50, calories: 20 }
-}
-
-const SALADS = {
-    CAESAR: { price: 100, calories: 20},
-    OLIVIER: { price: 50, calories: 80}
-}
-
 class Hamburger {
     constructor(size, stuffing) {
         this.size = size;
         this.stuffing = stuffing;
-        const SIZE_SMALL = { price: 50, calories: 20 }
-        const SIZE_LARGE = { price: 100, calories: 40 }
-        const STUFFING_CHEESE = { price: 10, calories: 20 }
-        const STUFFING_SALAD = { price: 20, calories: 5 }
-        const STUFFING_POTATO = { price: 15, calories: 10 }
     }
+
+    static get SIZE_SMALL() { return { price: 50, calories: 20 } }
+    static get SIZE_LARGE() { return { price: 100, calories: 40 } }
+    static get STUFFING_CHEESE() { return { price: 10, calories: 20 } }
+    static get STUFFING_SALAD() { return { price: 20, calories: 5 } }
+    static get STUFFING_POTATO() { return { price: 15, calories: 10 } }
 
     getSize() {
         return this.size;
@@ -30,30 +21,11 @@ class Hamburger {
     }
 
     calculatePrice() {
-        let chargeSize;
-        let chargeStuffing;
-        switch(size) {
-            case "small":
-                chargeSize = SIZE_SMALL.price;
-                break;
-            case "large":
-                chargeSize = SIZE_LARGE.price;
-                break;
-        }
+        return Hamburger[this.size].price + Hamburger[this.stuffing].price;
+    }
 
-        switch(stuffing) {
-            case "cheese":
-                chargeStuffing = STUFFING_CHEESE.price;
-                break;
-            case "salad":
-                chargeStuffing = STUFFING_SALAD.price;
-                break;
-            case "potato":
-                chargeStuffing = STUFFING_POTATO.price;
-                break;
-        }
-
-        return chargeSize + chargeStuffing;
+    calculateCalories() {
+        return Hamburger[this.size].calories + Hamburger[this.stuffing].calories;
     }
 }
 
@@ -63,6 +35,9 @@ class Salad {
         this.price = price;
         this.calories = calories;
     }
+
+    static get CAESAR() { return { price: 100, calories: 20} }
+    static get OLIVIER() { return { price: 50, calories: 80} }
 
     calculatePrice() {
         return this.price * this.weight/100;
@@ -75,14 +50,14 @@ class Salad {
 
 class Caesar extends Salad {
     constructor(weight) {
-        super(SALADS.CAESAR.price, SALADS.CAESAR.calories, weight);
+        super(Salad.CAESAR.price, Salad.CAESAR.calories, weight);
         this.weight = weight;
     }
 }
 
 class Olivier extends Salad {
     constructor(weight) {
-        super(SALADS.OLIVIER.price, SALADS.OLIVIER.calories, weight);
+        super(Salad.OLIVIER.price, Salad.OLIVIER.calories, weight);
         this.weight = weight;
     }
 }
@@ -92,6 +67,9 @@ class Drink {
         this.price = price;
         this.calories = calories;
     }
+
+    static get COFFEE() { return { price: 50, calories: 40} }
+    static get COLA() { return { price: 50, calories: 20} }
 
     calculatePrice() {
         return this.price;
@@ -104,22 +82,29 @@ class Drink {
 
 class Coffee extends Drink {
     constructor() {
-        super(DRINKS.COFFEE.price, DRINKS.COFFEE.calories);
+        super(Drink.COFFEE.price, Drink.COFFEE.calories);
     }
 }
 
 class Cola extends Drink {
     constructor() { 
-        super(DRINKS.COLA.price, DRINKS.COLA.calories);
+        super(Drink.COLA.price, Drink.COLA.calories);
     }    
 }
 
 class Order {
     constructor(...items) {
-        this.items = items;
-        this.totalPrice = this.calculateTotalPrice();
-        this.totalCalories = this.calculateTotalCalories();
+        this.posCount = 0;
+        this.positions = {};
+        for(let item of items) {
+            this.posCount++;
+            this.positions[`pos${this.posCount}`] = item;
+        }
         this.isPaid = false;
+    }
+
+    display() {
+        console.log(this);
     }
 
     add(item) {
@@ -127,7 +112,9 @@ class Order {
             console.log("This order has been already paid and can no longer be altered");
             return
         }
-        this.items.push(item);
+        this.posCount++;
+        this.positions[`pos${this.posCount}`] = item;
+        console.log("item added");
     }
 
     delete(position) {
@@ -135,15 +122,19 @@ class Order {
             console.log("This order has been already paid and can no longer be altered");
             return
         }
-        this.items.splice(position, 1);
+        if (this.positions.hasOwnProperty(position)) {
+            delete this.positions[position];
+        } else {
+            console.log("No such position in this order")
+        }
     }
 
     calculateTotalPrice() {
-        return this.items.reduce((prev, cur) => prev + cur.calculatePrice(), 0);
+        return Object.values(this.positions).reduce((prev, cur) => prev + cur.calculatePrice(), 0);
     }
 
     calculateTotalCalories() {
-        return this.items.reduce((prev, cur) => prev + cur.calculateCalories(), 0)
+        return Object.values(this.positions).reduce((prev, cur) => prev + cur.calculateCalories(), 0);
     }
 
     pay() {
@@ -155,15 +146,18 @@ class Order {
 let olivier = new Olivier(150);
 let cola = new Cola();
 let order1 = new Order(olivier, cola);
-console.log(olivier);
-console.log(cola);
-console.log(order1);
-console.log(order1.calculateTotalCalories());
+order1.display()
 let coffee = new Coffee();
 order1.add(coffee);
+let hamburger = new Hamburger("SIZE_LARGE", "STUFFING_CHEESE");
+order1.add(hamburger);
+let hamburger_small = new Hamburger("SIZE_LARGE", "STUFFING_POTATO");
+order1.add(hamburger_small);
+console.log(order1.calculateTotalCalories());
 console.log(order1.calculateTotalPrice());
-order1.pay();
 console.log(order1.isPaid);
 order1.add(cola);
-console.log(order1.items);
-
+order1.delete("pos2");
+order1.display();
+order1.pay();
+order1.add(cola);
