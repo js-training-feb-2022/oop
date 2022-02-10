@@ -1,0 +1,68 @@
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.menu {
+    max-width: 1280px;
+    display: flex;
+    flex-direction: column;
+}
+
+.hamburger {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.selectSize {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.bigHamburger {
+    margin-right: 15px;
+}
+
+.selectStuffing:nth-child(1) {
+    margin-right: 15px;
+}
+
+.salads {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+
+}
+
+.drink {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+
+}
+
+.orderWrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.check {
+    display: flex;
+}
+
+.calories {
+    min-width: 184px;
+    min-height: 100px;
+    background-color: blue;
+    margin-bottom: 20px;
+}
+
+.price {
+    min-width: 184px;
+    min-height: 100px;
+    background-color: blueviolet;
+    margin-bottom: 20px;
+}
+
+
