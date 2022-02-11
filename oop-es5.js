@@ -14,9 +14,7 @@ PriceAndCaloricity.prototype.calculate = function (PriceOrCaloricity) {
     return value;
 }
 
-function Meal(kind, kind1, price1, cal1, kind2, price2, cal2) {
-
-    this.kind = kind;
+function Meal(kind1, price1, cal1, kind2, price2, cal2) {
 
     this.kind1 = kind1;
 
@@ -33,9 +31,11 @@ Meal.prototype.getKind = function () {
     return this.kind;
 }
 
-function Hamburger(stuffing) {
+function Hamburger(kind, stuffing) {
 
-    Meal.call(this, 'маленький', 'маленький', 50, 20, 'большой', 100, 40);
+    Meal.call(this, 'маленький', 50, 20, 'большой', 100, 40);
+
+    this.kind = kind;
 
     this.stuffing = stuffing;
 
@@ -65,18 +65,36 @@ Hamburger.prototype.getStuffing = function () {
     return this.stuffing;
 }
 
-let hamburger1 = new Hamburger('картофель');
+function Salad(kind) {
+
+    Meal.call(this, 'Цезарь', 100, 20, 'Оливье', 50, 80)
+
+    this.kind = kind;
+}
+
+Salad.prototype = Object.create(Meal.prototype);
+
+function Drink(kind) {
+
+    Meal.call(this, 'Кола', 50, 40, 'Кофе', 80, 20)
+
+    this.kind = kind;
+}
+
+Drink.prototype = Object.create(Meal.prototype);
+
+let hamburger1 = new Hamburger('маленький', 'картофель');
 console.log(hamburger1.getKind());
 console.log(hamburger1.getStuffing());
 console.log(hamburger1.calculateHamburger('price'));
 console.log(hamburger1.calculateHamburger('caloricity'));
 
-let salad1 = new Meal('Цезарь', 'Цезарь', 100, 20, 'Оливье', 50, 80);
+let salad1 = new Salad('Цезарь');
 console.log(salad1.getKind());
 console.log(salad1.calculate('price'));
 console.log(salad1.calculate('caloricity'));
 
-let drink1 = new Meal('Кола', 'Кола', 50, 40, 'Кофе', 80, 20);
+let drink1 = new Drink('Кола');
 console.log(drink1.getKind());
 console.log(drink1.calculate('price'));
 console.log(drink1.calculate('caloricity'));

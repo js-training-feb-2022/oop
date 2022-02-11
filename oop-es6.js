@@ -18,11 +18,9 @@ class PriceAndCaloricity {
 }
 
 class Meal extends PriceAndCaloricity {
-    constructor(kind, kind1, price1, cal1, kind2, price2, cal2, price, caloricity) {
+    constructor(kind1, price1, cal1, kind2, price2, cal2, price, caloricity) {
         
         super(price, caloricity);
-
-        this.kind = kind;
 
         this.kind1 = kind1;
 
@@ -39,9 +37,11 @@ class Meal extends PriceAndCaloricity {
 }
 
 class Hamburger extends Meal {
-    constructor(stuffing) {
+    constructor(kind, stuffing) {
 
-        super('маленький', 'маленький', 50, 20, 'большой', 100, 40);
+        super('маленький', 50, 20, 'большой', 100, 40);
+
+        this.kind = kind;
 
         this.stuffing = stuffing;
     }
@@ -70,18 +70,36 @@ class Hamburger extends Meal {
 
 }
 
-let hamburger2 = new Hamburger('сыр');
+class Salad extends Meal {
+    constructor(kind){
+
+        super('Цезарь', 100, 20, 'Оливье', 50, 80)
+
+        this.kind = kind;
+    }
+}
+
+class Drink extends Meal {
+    constructor(kind){
+
+        super('Кола', 50, 40, 'Кофе', 80, 20)
+
+        this.kind = kind;
+    }
+}
+
+let hamburger2 = new Hamburger('маленький', 'сыр');
 console.log(hamburger2.getKind());
 console.log(hamburger2.getStuffing());
 console.log(hamburger2.calculateHamburger('price'));
 console.log(hamburger2.calculateHamburger('caloricity'));
 
-let salad2 = new Meal('Оливье', 'Цезарь', 100, 20, 'Оливье', 50, 80);
+let salad2 = new Salad('Оливье');
 console.log(salad2.getKind());
 console.log(salad2.calculate('price'));
 console.log(salad2.calculate('caloricity'));
 
-let drink2 = new Meal('Кофе', 'Кола', 50, 40, 'Кофе', 80, 20);
+let drink2 = new Drink('Кофе');
 console.log(drink2.getKind());
 console.log(drink2.calculate('price'));
 console.log(drink2.calculate('caloricity'));
