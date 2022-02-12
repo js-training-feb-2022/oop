@@ -65,14 +65,20 @@ Hamburger.prototype.getStuffing = function () {
     return this.stuffing;
 }
 
-function Salad(kind) {
+function Salad(kind, mass) {
 
     Meal.call(this, 'Цезарь', 100, 20, 'Оливье', 50, 80)
 
     this.kind = kind;
+
+    this.mass = mass;
 }
 
 Salad.prototype = Object.create(Meal.prototype);
+
+Salad.prototype.calculateSalad = function (PriceOrCaloricity){
+    return this.mass/100*this.calculate(PriceOrCaloricity);
+}
 
 function Drink(kind) {
 
@@ -83,18 +89,35 @@ function Drink(kind) {
 
 Drink.prototype = Object.create(Meal.prototype);
 
+function Order(hamburger, salad, drink){
+    this.hamburger = hamburger;
+
+    this.salad = salad;
+
+    this.drink = drink;
+}
+
+Order.prototype.calculateOrder = function (PriceOrCaloricity){
+    return this.hamburger.reduce((p, c) => c.calculateHamburger(PriceOrCaloricity) + p, 0) + this.salad.reduce((p, c) => c.calculateSalad(PriceOrCaloricity) + p, 0) + this.drink.reduce((p, c) => c.calculate(PriceOrCaloricity) + p, 0);
+}
+
 let hamburger1 = new Hamburger('маленький', 'картофель');
 console.log(hamburger1.getKind());
 console.log(hamburger1.getStuffing());
 console.log(hamburger1.calculateHamburger('price'));
 console.log(hamburger1.calculateHamburger('caloricity'));
 
-let salad1 = new Salad('Цезарь');
+let salad1 = new Salad('Цезарь', 150);
 console.log(salad1.getKind());
-console.log(salad1.calculate('price'));
-console.log(salad1.calculate('caloricity'));
+console.log(salad1.calculateSalad('price'));
+console.log(salad1.calculateSalad('caloricity'));
+let salad2 = new Salad('Оливье', 50);
 
 let drink1 = new Drink('Кола');
 console.log(drink1.getKind());
 console.log(drink1.calculate('price'));
 console.log(drink1.calculate('caloricity'));
+
+let order1 = new Order([hamburger1, hamburger1], [salad1, salad2], [drink1, drink1])
+console.log(order1.calculateOrder('price'));
+console.log(order1.calculateOrder('caloricity'));
