@@ -19,7 +19,7 @@ class PriceAndCaloricity {
 
 class Meal extends PriceAndCaloricity {
     constructor(kind1, price1, cal1, kind2, price2, cal2, price, caloricity) {
-        
+
         super(price, caloricity);
 
         this.kind1 = kind1;
@@ -71,16 +71,22 @@ class Hamburger extends Meal {
 }
 
 class Salad extends Meal {
-    constructor(kind){
+    constructor(kind, mass) {
 
         super('Цезарь', 100, 20, 'Оливье', 50, 80)
 
         this.kind = kind;
+
+        this.mass = mass;
+    }
+
+    calculateSalad(PriceOrCaloricity) {
+        return this.mass / 100 * this.calculate(PriceOrCaloricity);
     }
 }
 
 class Drink extends Meal {
-    constructor(kind){
+    constructor(kind) {
 
         super('Кола', 50, 40, 'Кофе', 80, 20)
 
@@ -88,18 +94,86 @@ class Drink extends Meal {
     }
 }
 
-let hamburger2 = new Hamburger('маленький', 'сыр');
-console.log(hamburger2.getKind());
-console.log(hamburger2.getStuffing());
-console.log(hamburger2.calculateHamburger('price'));
-console.log(hamburger2.calculateHamburger('caloricity'));
+class Order {
+    constructor(array) {
+        this.array = array;
 
-let salad2 = new Salad('Оливье');
-console.log(salad2.getKind());
-console.log(salad2.calculate('price'));
-console.log(salad2.calculate('caloricity'));
+        this.editable = true;
+    }
 
-let drink2 = new Drink('Кофе');
-console.log(drink2.getKind());
-console.log(drink2.calculate('price'));
-console.log(drink2.calculate('caloricity'));
+    calculateOrder(PriceOrCaloricity) {
+        return this.array.reduce((p, c) => {
+            if (c instanceof Hamburger) {
+                return c.calculateHamburger(PriceOrCaloricity) + p;
+            } else if (c instanceof Salad) {
+                return c.calculateSalad(PriceOrCaloricity) + p;
+            } else if (c instanceof Drink) {
+                return c.calculate(PriceOrCaloricity) + p;
+            }
+
+        }, 0);
+    }
+
+    addPosition(position) {
+        if (this.editable === true) {
+            this.array.push(position);
+            return `Вы добавили ${position.kind}`;
+        } else {
+            return `Вы не можете изменить заказ после оплаты`;
+        }
+
+    }
+
+    removePosition(position) {
+        if (this.editable === true) {
+            if (this.array.includes(position)) {
+                this.array.splice(this.array.indexOf(position), 1);
+                return `Вы удалили ${position.kind}`;
+            } else {
+                return `Такая позиция не найдена`
+            }
+
+        } else {
+            return `Вы не можете изменить заказ после оплаты`;
+        }
+    }
+
+    pay() {
+        if (this.editable === true) {
+            this.editable = false;
+            return 'Оплата прошла успешно';
+        } else {
+            return 'Заказ уже был оплачен';
+        }
+
+    }
+}
+
+let hamburger1 = new Hamburger('маленький', 'картофель');
+console.log(hamburger1.getKind());
+console.log(hamburger1.getStuffing());
+console.log(hamburger1.calculateHamburger('price'));
+console.log(hamburger1.calculateHamburger('caloricity'));
+
+let salad1 = new Salad('Цезарь', 150);
+console.log(salad1.getKind());
+console.log(salad1.calculateSalad('price'));
+console.log(salad1.calculateSalad('caloricity'));
+let salad2 = new Salad('Оливье', 50);
+
+let drink1 = new Drink('Кола');
+console.log(drink1.getKind());
+console.log(drink1.calculate('price'));
+console.log(drink1.calculate('caloricity'));
+
+let order1 = new Order([hamburger1, hamburger1, salad1, salad2, drink1, drink1])
+console.log(order1.calculateOrder('price'));
+console.log(order1.calculateOrder('caloricity'));
+
+console.log(order1.addPosition(salad2));
+console.log(order1.removePosition(salad1));
+console.log(order1.removePosition(salad1));
+console.log(order1.pay());
+console.log(order1.removePosition(salad1));
+console.log(order1.addPosition(salad2));
+console.log(order1.pay());

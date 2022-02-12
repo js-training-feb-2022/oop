@@ -76,8 +76,8 @@ function Salad(kind, mass) {
 
 Salad.prototype = Object.create(Meal.prototype);
 
-Salad.prototype.calculateSalad = function (PriceOrCaloricity){
-    return this.mass/100*this.calculate(PriceOrCaloricity);
+Salad.prototype.calculateSalad = function (PriceOrCaloricity) {
+    return this.mass / 100 * this.calculate(PriceOrCaloricity);
 }
 
 function Drink(kind) {
@@ -89,16 +89,57 @@ function Drink(kind) {
 
 Drink.prototype = Object.create(Meal.prototype);
 
-function Order(hamburger, salad, drink){
-    this.hamburger = hamburger;
+function Order(array) {
+    this.array = array;
 
-    this.salad = salad;
-
-    this.drink = drink;
+    this.editable = true;
 }
 
-Order.prototype.calculateOrder = function (PriceOrCaloricity){
-    return this.hamburger.reduce((p, c) => c.calculateHamburger(PriceOrCaloricity) + p, 0) + this.salad.reduce((p, c) => c.calculateSalad(PriceOrCaloricity) + p, 0) + this.drink.reduce((p, c) => c.calculate(PriceOrCaloricity) + p, 0);
+Order.prototype.calculateOrder = function (PriceOrCaloricity) {
+    return this.array.reduce((p, c) => {
+        if (c instanceof Hamburger) {
+            return c.calculateHamburger(PriceOrCaloricity) + p;
+        } else if (c instanceof Salad) {
+            return c.calculateSalad(PriceOrCaloricity) + p;
+        } else if (c instanceof Drink) {
+            return c.calculate(PriceOrCaloricity) + p;
+        }
+
+    }, 0);
+}
+
+Order.prototype.addPosition = function (position) {
+    if (this.editable === true) {
+        this.array.push(position);
+        return `Вы добавили ${position.kind}`;
+    } else {
+        return `Вы не можете изменить заказ после оплаты`;
+    }
+
+}
+
+Order.prototype.removePosition = function (position) {
+    if (this.editable === true) {
+        if (this.array.includes(position)) {
+            this.array.splice(this.array.indexOf(position), 1);
+            return `Вы удалили ${position.kind}`;
+        } else {
+            return `Такая позиция не найдена`
+        }
+
+    } else {
+        return `Вы не можете изменить заказ после оплаты`;
+    }
+}
+
+Order.prototype.pay = function () {
+    if (this.editable === true) {
+        this.editable = false;
+        return 'Оплата прошла успешно';
+    } else {
+        return 'Заказ уже был оплачен';
+    }
+
 }
 
 let hamburger1 = new Hamburger('маленький', 'картофель');
@@ -118,6 +159,14 @@ console.log(drink1.getKind());
 console.log(drink1.calculate('price'));
 console.log(drink1.calculate('caloricity'));
 
-let order1 = new Order([hamburger1, hamburger1], [salad1, salad2], [drink1, drink1])
+let order1 = new Order([hamburger1, hamburger1, salad1, salad2, drink1, drink1])
 console.log(order1.calculateOrder('price'));
 console.log(order1.calculateOrder('caloricity'));
+
+console.log(order1.addPosition(salad2));
+console.log(order1.removePosition(salad1));
+console.log(order1.removePosition(salad1));
+console.log(order1.pay());
+console.log(order1.removePosition(salad1));
+console.log(order1.addPosition(salad2));
+console.log(order1.pay());
