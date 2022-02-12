@@ -1,7 +1,12 @@
-export class Hamburger {
+import { MenuItem } from "./MenuItem.js";
+
+export class Hamburger extends MenuItem {
     constructor(size, stuffing) {
+        super(`${size.slice(5)} HAMBURGER with ${stuffing.slice(9)}`);
         this.size = size;
         this.stuffing = stuffing;
+        this.price = this.calculatePrice();
+        this.calories = this.calculateCalories();
     }
 
     static get SIZE_SMALL() { return { price: 50, calories: 20 } }

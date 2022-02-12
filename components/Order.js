@@ -20,7 +20,7 @@ export class Order {
         }
         this.posCount++;
         this.positions[`pos${this.posCount}`] = item;
-        console.log("item added");
+        console.log(`${item.name} added`);
     }
 
     delete(position) {
@@ -29,6 +29,7 @@ export class Order {
             return
         }
         if (this.positions.hasOwnProperty(position)) {
+            console.log(`${this.positions[position].name} has been deleted`)
             delete this.positions[position];
         } else {
             console.log("No such position in this order")
@@ -41,6 +42,10 @@ export class Order {
 
     calculateTotalCalories() {
         return Object.values(this.positions).reduce((prev, cur) => prev + cur.calculateCalories(), 0);
+    }
+
+    checkPaid() {
+        return this.isPaid ? "Order has been paid" : "Order has not been paid";
     }
 
     pay() {
