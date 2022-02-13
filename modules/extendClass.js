@@ -62,8 +62,8 @@ class CreateMenu {
     payPositions() {
         Object.freeze(this.positions);
         store.push(this.positions);
-        priceStore.push(this.calculatePrice(this.positions))
-        caloriesStore.push(this.calculateCalories(this.positions))
+        priceStore.push(this.calculatePrice(this.positions));
+        caloriesStore.push(this.calculateCalories(this.positions));
     }
 }
 

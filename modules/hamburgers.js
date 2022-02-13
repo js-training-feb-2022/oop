@@ -29,10 +29,10 @@ class Hamburger extends CreateMenu {
     }
 
     getSize() {
-        if (this.positions.length === 0) return console.log('First you need to order')
+        if (this.positions.length === 0) return console.log('First you need to order');
         for (let i = 0; i < this.positions.length; i++) {
             if(this.positions[i] === 'SIZE_LARGE' || this.positions[i] === 'SIZE_SMALL')
-                console.log(this.positions[i])
+                console.log(this.positions[i]);
         }
     }
 
@@ -40,7 +40,7 @@ class Hamburger extends CreateMenu {
         if (this.positions.length === 0) return console.log('First you need to order')
         for (let i = 0; i < this.positions.length; i++) {
             if(this.positions[i] !== 'SIZE_LARGE' && this.positions[i] !== 'SIZE_SMALL')
-                console.log(this.positions[i])
+                console.log(this.positions[i]);
         }
     }
 }

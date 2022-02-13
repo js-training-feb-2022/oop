@@ -15,12 +15,9 @@ const drink = new Beverages();
 //calculatePrice, calculateCalories, addPositions, removePositions, payPositions - методы расчета
 
 // for example:
-// hamburger.addPositions('SIZE_LARGE', 'STUFFING_SALAD');
+hamburger.addPositions('SIZE_LARGE', 'STUFFING_SALAD');
 salad.addPositions('CEZAR', 'OLIVIE', 'CEZAR', 'OLIVIE');
 drink.addPositions('COFFEE');
-
-hamburger.getSize()
-
 
 // - Функция для отображения всех заказанных позиций
 function getOrder() {
@@ -29,11 +26,11 @@ function getOrder() {
     salad.payPositions();
 
     if (store.length === 0)
-        return console.log('Order is empty')
+        return console.log('Order is empty');
     for (let i = 0; i < store.length; i++) {
         if (i === 0)
             console.log(`\nYour order:\n------`);
-        console.log(`${i}) ${store[i]} - ${priceStore[i]}tgr ( ${caloriesStore[i]} cal)`)
+        console.log(`${i}) ${store[i]} - ${priceStore[i]}tgr ( ${caloriesStore[i]} cal)`);
     }
 }
 // END - Функция для отображения всех заказанных позиций
