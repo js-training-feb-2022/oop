@@ -1,3 +1,5 @@
+import store from '../Store/store.js';
+
 class CreateMenu {
     constructor() {
         this.priceCounter = 0;
@@ -7,18 +9,22 @@ class CreateMenu {
     }
 
     calculatePrice(...args) {
-        for (let i = 0; i < args.length; i++)
-            for (const name in this.menu)
+        for (let i = 0; i < args.length; i++) {
+            for (const name in this.menu){
                 if (name === args[i])
                     this.priceCounter += this.menu[name].price;
+            }
+        }
         return console.log(this.priceCounter);
     }
 
     calculateCalories(...args) {
-        for (let i = 0; i < args.length; i++)
-            for (const name in this.menu)
+        for (let i = 0; i < args.length; i++){
+            for (const name in this.menu){
                 if (name === args[i])
                     this.caloriesCounter += this.menu[name].calories;
+            }
+        }
         return console.log(this.caloriesCounter);
     }
 
@@ -28,7 +34,7 @@ class CreateMenu {
         for (let i = 0; i < arguments.length; i++) {
             this.positions.push(arguments[i]);
         }
-        return console.log(this.positions);
+        return this.positions;
     }
 
     removePositions() {
@@ -45,9 +51,9 @@ class CreateMenu {
 
     payPositions() {
         Object.freeze(this.positions);
-        return console.log(`thaks for order!\nYour order:\n${this.positions}`);
+        store.push(this.positions)
+        // return console.log(`thanks for order!\n------\nYour order:\n${this.positions}\n-------`);
     }
-
 }
 
 export default CreateMenu;
