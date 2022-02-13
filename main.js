@@ -14,7 +14,7 @@ const drink = new Beverages();
 // getSize, getStuffing - методы только для класса гамбургер
 //calculatePrice, calculateCalories, addPositions, removePositions, payPositions - методы расчета
 
-//for example:
+// for example:
 hamburger.addPositions('SIZE_LARGE', 'STUFFING_SALAD');
 hamburger.payPositions();
 salad.addPositions('CEZAR', 'OLIVIE');
@@ -22,8 +22,16 @@ salad.payPositions();
 drink.addPositions('COFFEE');
 drink.payPositions();
 
-for (let i = 0; i < store.length; i++) {
-    if (i === 0)
-        console.log(`\nYour order:\n------`);
-    console.log(`${i}) ${store[i]}`)
+function getOrder() {
+    if (store.length === 0)
+        return console.log('Order is empty')
+
+    for (let i = 0; i < store.length; i++) {
+        if (i === 0)
+            console.log(`\nYour order:\n------`);
+        console.log(`${i}) ${store[i]}`)
+    }
 }
+
+getOrder();
+

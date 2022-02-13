@@ -46,13 +46,12 @@ class CreateMenu {
                     this.positions.splice(j, 1);
             }
         }
-        return console.log(this.positions);
+        return this.positions;
     }
 
     payPositions() {
         Object.freeze(this.positions);
-        store.push(this.positions)
-        // return console.log(`thanks for order!\n------\nYour order:\n${this.positions}\n-------`);
+        store.push(this.positions);
     }
 }
 
