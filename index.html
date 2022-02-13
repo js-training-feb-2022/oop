@@ -9,36 +9,51 @@
 </head>
 <body>
     <div class="menu">
-        <div class="hamburger">
-            <div class="selectSize">
-                <button class="bigHamburger">BIG HAM</button>
-                <button class="smallHamburger">SMALL HAM</button>
-            </div>
-            <div class="selectStuffing">
-                <button class="addCheese">ADD CHEESE</button>
-                <button class="addSalad">ADD SALAD</button>
-                <button class="addPotato">ADD POTATO</button>
-            </div>
+        <div class="checker visible">
+            <button class="Hamburger">Hamburger</button>
+            <button class="Salad">Salad</button>
+            <button class="Drink">Drink</button>
         </div>
-        <div class="salads">
+        <div class="hamSize">
+            <button class="bigHamburger">BIG HAM</button>
+            <button class="smallHamburger">SMALL HAM</button>
+        </div>
+        <div class="hamStuffing">
+            <button class="addCheese">ADD CHEESE</button>
+            <button class="addSalad">ADD SALAD</button>
+            <button class="addPotato">ADD POTATO</button>
+        </div>
+        <div class="saladChecker">
             <button class="caesar">CAESAR</button>
             <button class="olivie">OLIVIE</button>
         </div>
-        <div class="drink">
+        <div class="saladWeight">
+            <label for="weight">
+                <p>введите вес салата</p>
+                <input type="text" name="weight" id="weight_input">
+            </label>
+            <button class="saladWeightButton">Add</button>
+        </div>
+        <div class="drinkChecker">
             <button class="coke">COKE</button>
             <button class="coffee">COFFEE</button>
         </div>
     </div>
     <div class="orderWrapper">
+        <div class="orderList">
+            <ul></ul>
+        </div>
         <div class="check">
             <div class="calories">
-                <p>Пищевая ценность</p>
+                <h3>Калорийность:</h3>
+                <h3 class="finalCalories"></h3>
             </div>
             <div class="price">
-                <p>Цена</p>
+                <h3>Цена:</h3>
+                <h3 class="finalPrice"></h3>
             </div>
         </div>
-        <button class="order">ORDER</button>
+        <button class="payButton">PAY!!!</button>
     </div>
     <script src="/script.js"></script>
 </body>
