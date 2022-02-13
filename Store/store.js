@@ -1,3 +1,4 @@
 // Используется для хранения всех заказанных позиций
-let store = [];
-export default store;
+export let store = [];
+export let priceStore = [];
+export let caloriesStore = [];

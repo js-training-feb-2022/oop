@@ -29,23 +29,19 @@ class Hamburger extends CreateMenu {
     }
 
     getSize() {
-        let result = [...(new Set(arguments))];
-        return console.log(result.join(''));
+        if (this.positions.length === 0) return console.log('First you need to order')
+        for (let i = 0; i < this.positions.length; i++) {
+            if(this.positions[i] === 'SIZE_LARGE' || this.positions[i] === 'SIZE_SMALL')
+                console.log(this.positions[i])
+        }
     }
 
-    getStuffing(...stuffing) {
-        let result = new Set(stuffing);
-        return console.log([...result].join(' '));
-    }
-
-    calculatePrice(...arg) {
-        const args = [...(new Set(arg))];
-        super.calculatePrice(...args);
-    }
-
-    calculateCalories(...arg) {
-        const args = [...(new Set(arg))];
-        super.calculateCalories(...args);
+    getStuffing() {
+        if (this.positions.length === 0) return console.log('First you need to order')
+        for (let i = 0; i < this.positions.length; i++) {
+            if(this.positions[i] !== 'SIZE_LARGE' && this.positions[i] !== 'SIZE_SMALL')
+                console.log(this.positions[i])
+        }
     }
 }
 export default Hamburger;
