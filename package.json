@@ -1,0 +1,20 @@
+{
+  "name": "fast-food-ordering-system",
+  "version": "1.0.0",
+  "description": "Вы хозяин небольшого кафе быстрого питания. Ваше меню состоит из следующих позиций:\r #### 1) Гамбургер",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/js-training-feb-2022/oop.git"
+  },
+  "author": "Anton Kapustin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/js-training-feb-2022/oop/issues"
+  },
+  "homepage": "https://github.com/js-training-feb-2022/oop#readme"
+}
