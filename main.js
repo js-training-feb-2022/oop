@@ -14,26 +14,24 @@ const drink = new Beverages();
 // getSize, getStuffing - методы только для класса гамбургер
 //calculatePrice, calculateCalories, addPositions, removePositions, payPositions - методы расчета, добавления и удаления
 
-
-let burger = ['SIZE_LARGE', 'STUFFING_SALAD', 'STUFFING_CHEESE']
-let burger2 = ['STUFFING_SALAD', 'SIZE_SMALL', 'STUFFING_POTATO']
-let salads = ['CEZAR', 'OLIVIE', 'CEZAR', 'OLIVIE']
-let drinks = ['COFFEE', 'COLA']
-let drinks2 = ['COLA']
+const burger = ['SIZE_LARGE', 'STUFFING_SALAD', 'STUFFING_CHEESE']
+const burger2 = ['STUFFING_SALAD', 'SIZE_SMALL', 'STUFFING_POTATO']
+const salads = ['CEZAR', 'OLIVIE', 'CEZAR', 'OLIVIE']
+const drinks = ['COFFEE', 'COLA']
+const drinks2 = ['COLA']
 
 let order = new Order();
-
 order.addPositions(burger, burger2, salads, drinks, drinks2)
+
+
 // for example:
 
 // console.log(hamburger.calculatePrice())
 // console.log(salad.calculateCalories())
-// hamburger.getStuffing()
-order.payPositions()
-// hamburger.getSize()
 // console.log(drink.calculateCalories())
-
+// hamburger.getStuffing()
+// hamburger.getSize()
 // order.calculateCalories()
 // order.calculatePrice()
-// order.payPositions();
-// order.removePositions('COLA')
+// order.removePositions('COLA');
+// order.payPositions()

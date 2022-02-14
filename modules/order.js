@@ -31,7 +31,6 @@ class Order extends CreateMenu {
         return console.log(this.priceCounter);
     }
 
-
     removePositions(item) {
         if (this.isPay === true || store === [])
             return store;
