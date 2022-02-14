@@ -2,9 +2,9 @@
 var order = {
     largeBurgers: {
         quontity: 1,
-        cheese: 2,
+        cheese: 0,
         salad: 0,
-        potatoes: 4
+        potatoes: 0
     },
     smallBurgers: {
         quontity: 1,
@@ -13,8 +13,8 @@ var order = {
         potatoes: 0
     },
     olivie: 150,
-    cesar: 150,
-    cola: 1,
+    cesar: 0,
+    cola: 0,
     coffe: 1
 };
 function Order(){
