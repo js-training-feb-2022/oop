@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Compressed CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/css/foundation.min.css"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./styles/main.css" />
+    <meta charset="UTF-8" />
+    <title>Маленькое кафе</title>
+  </head>
+  <body class="grid-x">
+    <form class="grid-y" id="menuForm">
+      <section class="positions grid-x">
+        <div class="card" style="width: 200px">
+          <div class="card-divider" style="">Гамбургер</div>
+          <img src="media/small.jpg" id="hamburgerImage" />
+          <div class="card-section grid-y grid-padding-y" style="height: 80%">
+            <div class="grid-x">
+              <div class="button-group round toggle grid-y">
+                <input
+                  type="radio"
+                  id="small"
+                  value="small"
+                  name="size"
+                  data-waschecked="false"
+                />
+                <label class="button" for="small">Маленький</label>
+                <input
+                  type="radio"
+                  id="big"
+                  value="big"
+                  name="size"
+                  data-waschecked="false"
+                />
+                <label class="button" for="big">Большой</label>
+              </div>
+              <div class="button-group round toggle grid-y stuffing">
+                <input
+                  type="radio"
+                  id="cheese"
+                  value="cheese"
+                  name="filler"
+                  checked
+                  data-waschecked="true"
+                />
+                <label class="button" for="cheese">c 🧀</label>
+                <input
+                  type="radio"
+                  id="salad"
+                  value="salad"
+                  name="filler"
+                  data-waschecked="false"
+                />
+                <label class="button" for="salad">c 🥬</label>
+                <input
+                  type="radio"
+                  id="fries"
+                  value="fries"
+                  name="filler"
+                  data-waschecked="false"
+                />
+                <label class="button" for="fries">c 🍟</label>
+              </div>
+            </div>
+            <div class="grid-x align-justify" style="">
+              <span class="cell small-3"></span>
+              <span class="cell small-3" id="hamburgerPrice">50 💵</span>
+              <span class="cell small-3" id="hamburgerCalories">20 кКал</span>
+            </div>
+            <div class="grid-x align-justify" style="">
+              <span class="cell small-3">+начинка</span>
+              <span class="cell small-3" id="fillerPrice">20 💵</span>
+              <span class="cell small-3" id="fillerCalories">10 кКал</span>
+            </div>
+            <hr />
+            <div class="grid-x align-justify" style="">
+              <span class="cell small-3">Итого</span>
+              <span class="cell small-3" id="hamburgerFullPrice">70 💵</span>
+              <span class="cell small-3" id="hamburgerFullCalories"
+                >30 кКал</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="width: 150px; word-wrap: break-word">
+          <div class="card-divider" style="">Напиток</div>
+          <img src="media/coffee.jpg" id="drinkImage" />
+          <div class="card-section grid-y grid-padding-y" style="height: 50%">
+            <div class="grid-x">
+              <div class="button-group round toggle grid-y">
+                <input
+                  type="radio"
+                  id="cola"
+                  value="cola"
+                  name="drinkName"
+                  data-waschecked="false"
+                />
+                <label class="button" for="cola">Кола</label>
+                <input
+                  type="radio"
+                  id="coffee"
+                  value="coffee"
+                  name="drinkName"
+                  data-waschecked="false"
+                />
+                <label class="button" for="coffee">Кофе</label>
+              </div>
+            </div>
+            <div class="grid-x align-justify" style="">
+              <span class="cell small-3" id="drinkPrice">50 💵</span>
+              <span class="cell small-3" id="drinkCalories">20 кКал</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="width: 150px">
+          <div class="card-divider" style="">Салат</div>
+          <img src="media/caesar.jpg" id="saladImage" />
+          <div class="card-section grid-y grid-padding-y" style="height: 80%">
+            <div class="grid-y">
+              <div class="button-group round toggle grid-y">
+                <input
+                  type="radio"
+                  id="caesar"
+                  value="caesar"
+                  name="saladName"
+                  data-waschecked="false"
+                />
+                <label class="button" for="caesar">Цезарь</label>
+                <input
+                  type="radio"
+                  id="olivier"
+                  value="olivier"
+                  name="saladName"
+                  data-waschecked="false"
+                />
+                <label class="button" for="olivier">Оливье</label>
+              </div>
+              <div class="grid-x align-justify align-middle">
+                <span>
+                  <input
+                    id="weight"
+                    type="number"
+                    name="weight"
+                    min="50"
+                    value="200"
+                    pattern="[0-9]"
+                    step="50"
+                    style="margin: 0"
+                  />
+                </span>
+                <label for="weight">грамм</label>
+              </div>
+            </div>
+            <div class="grid-x align-justify" style="">
+              <span class="cell small-3" id="saladPrice">50 💵</span>
+              <span class="cell small-3" id="saladCalories">20 кКал</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <button type="submit" class="button small expanded">Добавить в 🛒</button>
+    </form>
+    <div class="card" style="width: 300px" id="cardSection">
+      <img src="media/logo.png" />
+    </div>
+    <script src="./scripts/position.js"></script>
+    <script src="./scripts/filler.js"></script>
+    <script src="./scripts/hamburger.js"></script>
+    <script src="./scripts/drink.js"></script>
+    <script src="./scripts/salad.js"></script>
+    <script src="./scripts/order.js"></script>
+    <script src="./scripts/small_cafe.js"></script>
+  </body>
+</html>
