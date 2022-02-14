@@ -1,0 +1,25 @@
+{
+  "name": "oop",
+  "version": "1.0.0",
+  "description": "Вы хозяин небольшого кафе быстрого питания. Ваше меню состоит из следующих позиций:\r #### 1) Гамбургер",
+  "main": "menu.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bananazigzags/oop.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bananazigzags/oop/issues"
+  },
+  "homepage": "https://github.com/bananazigzags/oop#readme",
+  "devDependencies": {
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0"
+  }
+}
