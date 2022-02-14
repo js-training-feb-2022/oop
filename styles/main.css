@@ -1,0 +1,21 @@
+body {
+    text-align: center;
+}
+.button-group input {
+    display: none;
+}
+.button-group input:checked + label, .button-group input:checked + label:active {
+    background-color: salmon;
+}
+.button-group .button:last-child
+{
+    margin-right: 1px;
+}
+.positions{
+    width: 70vw;
+}
+
+.stuffing > label {
+    background-color: #467ea3;
+}
+
