@@ -1,21 +1,21 @@
 //Make your order
 var order = {
-    bigburgers: {
-        quontity: 5,
+    largeBurgers: {
+        quontity: 1,
         cheese: 2,
         salad: 0,
         potatoes: 4
     },
-    smallburgers: {
-        quontity: 3,
+    smallBurgers: {
+        quontity: 1,
         cheese: 0,
         salad: 0,
         potatoes: 0
     },
-    olivie: 700,
-    cesar: 700,
-    cola: 2,
-    coffe: 2
+    olivie: 150,
+    cesar: 150,
+    cola: 1,
+    coffe: 1
 };
 function Order(){
     this.price = 0;
@@ -33,7 +33,7 @@ Order.prototype.add_potatoes = function (num) {
     this.price += (15 * num);
     this.cal += (10 * num);
 }
-Order.prototype.addBigBurger = function (num){
+Order.prototype.addLargeBurger = function (num){
     this.price += (100 * num);
     this.cal += (40 * num);
 }
@@ -59,14 +59,14 @@ Order.prototype.addCoffe = function(){
 }
 function makeorder() {
     var bill = new Order();
-    bill.addBigBurger(order.bigburgers.quontity);
-    bill.addSmallBurger(order.smallburgers.quontity);
-    bill.add_cheese(order.bigburgers.cheese);
-    bill.add_potatoes(order.bigburgers.potatoes);
-    bill.add_salad(order.bigburgers.salad);
-    bill.add_cheese(order.smallburgers.cheese);
-    bill.add_potatoes(order.smallburgers.potatoes);
-    bill.add_salad(order.smallburgers.salad);
+    bill.addlargeBurger(order.largeBurgers.quontity);
+    bill.addSmallBurger(order.smallBurgers.quontity);
+    bill.add_cheese(order.largeBurgers.cheese);
+    bill.add_potatoes(order.largeBurgers.potatoes);
+    bill.add_salad(order.largeBurgers.salad);
+    bill.add_cheese(order.smallBurgers.cheese);
+    bill.add_potatoes(order.smallBurgers.potatoes);
+    bill.add_salad(order.smallBurgers.salad);
     bill.addCesar(order.cesar);
     bill.addOlivie(order.olivie);
     bill.addCoffe(order.coffe);
