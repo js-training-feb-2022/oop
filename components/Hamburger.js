@@ -1,7 +1,20 @@
 import { MenuItem } from "./MenuItem.js";
 
+const sizeList = ["SIZE_SMALL", "SIZE_LARGE"];
+const stuffingList = ["STUFFING_CHEESE", "STUFFING_SALAD", "STUFFING_POTATO"];
+
 export class Hamburger extends MenuItem {
     constructor(size, stuffing) {
+        if (arguments.length !== 2) {
+            throw new Error("You need to choose size and stuffing!")
+        }
+        
+        if (!sizeList.includes(size)) {
+            throw new Error("No such size on the menu!")
+        } else if (!stuffingList.includes(stuffing)) {
+            throw new Error("No such stuffing on the menu!")
+        }
+
         super(`${size.slice(5)} HAMBURGER with ${stuffing.slice(9)}`);
         this.size = size;
         this.stuffing = stuffing;

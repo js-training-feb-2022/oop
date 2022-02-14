@@ -1,7 +1,15 @@
 import { MenuItem } from "./MenuItem.js"
 
+const saladList = ["CAESAR", "OLIVIER"];
+
 export class Salad extends MenuItem {
-    constructor(name, weight) {
+    constructor(name, weight = 100) {
+        if (!name) {
+            throw new Error("Enter salad name!");
+        } else if (!saladList.includes(name)) {
+            throw new Error("No such salad on the menu!");
+        }
+
         super(name);
         this.weight = weight;
         this.price = Salad[name].price;
