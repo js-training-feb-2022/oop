@@ -1,0 +1,130 @@
+body {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.checker {
+    display: none;
+}
+.hamSize {
+    display: none;
+}
+.hamStuffing {
+    display: none;
+}
+.saladChecker {
+    display: none;
+}
+.saladWeight {
+    display: none;
+}
+.drinkChecker {
+    display: none;
+}
+.visible {
+    display: flex;
+    flex-direction: column;
+    min-height: 522px;
+    justify-content: center;
+}
+.unvisible {
+    display: none;
+}
+
+button {
+    all: unset;
+    border-radius: 5px;
+    border: 2px solid transparent;
+    background: #4676D7;
+    color: #fff;
+    padding: 8px 16px;
+    font-size: 16px;
+    min-width: 100px;
+    padding: 8px 16px;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+/*     align-self: flex-start;
+ */    transition: 0.7s ease;
+    margin-bottom: 10px;
+}
+
+button:hover:enabled {
+    background: transparent;
+    color: #222;
+    border-color: #4676d7;
+}
+
+button:active:enabled {
+    background: #08a115;
+    transition: 0.1s ease;
+    color: #222;
+    border-color: #4676d7;
+}
+
+.menu {
+    max-width: 1280px;
+    display: flex;
+    flex-direction: column;
+}
+
+.hamburger {
+    display: flex;
+    flex-direction: column;
+}
+
+.selectSize {
+    display: flex;
+    flex-direction: column;
+}
+
+.selectStuffing {
+    display: flex;
+    flex-direction: column;
+}
+
+.salads {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+#weight_input {
+    max-width: 130px;
+    margin-bottom: 20px;
+}
+
+.orderWrapper {
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+    justify-content: center;
+}
+
+.orderList {
+    min-height: 350px;
+    border: 1px solid black;
+}
+
+.check {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.calories {
+    min-width: 195px;
+    min-height: 100px;
+    border: 1px solid black ;
+    margin-bottom: 20px;
+}
+
+.price {
+    min-width: 195px;
+    min-height: 100px;
+    border: 1px solid black ;
+    margin-bottom: 20px;
+}
+
+

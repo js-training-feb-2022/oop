@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="menu">
+        <div class="checker visible">
+            <button class="Hamburger">Hamburger</button>
+            <button class="Salad">Salad</button>
+            <button class="Drink">Drink</button>
+        </div>
+        <div class="hamSize">
+            <button class="bigHamburger">BIG HAM</button>
+            <button class="smallHamburger">SMALL HAM</button>
+        </div>
+        <div class="hamStuffing">
+            <button class="addCheese">ADD CHEESE</button>
+            <button class="addSalad">ADD SALAD</button>
+            <button class="addPotato">ADD POTATO</button>
+        </div>
+        <div class="saladChecker">
+            <button class="caesar">CAESAR</button>
+            <button class="olivie">OLIVIE</button>
+        </div>
+        <div class="saladWeight">
+            <label for="weight">
+                <p>введите вес салата</p>
+                <input type="text" name="weight" id="weight_input">
+            </label>
+            <button class="saladWeightButton">Add</button>
+        </div>
+        <div class="drinkChecker">
+            <button class="coke">COKE</button>
+            <button class="coffee">COFFEE</button>
+        </div>
+    </div>
+    <div class="orderWrapper">
+        <div class="orderList">
+            <ul></ul>
+        </div>
+        <div class="check">
+            <div class="calories">
+                <h3>Калорийность:</h3>
+                <h3 class="finalCalories"></h3>
+            </div>
+            <div class="price">
+                <h3>Цена:</h3>
+                <h3 class="finalPrice"></h3>
+            </div>
+        </div>
+        <button class="payButton">PAY!!!</button>
+    </div>
+    <script src="./script.js"></script>
+</body>
+</html>
