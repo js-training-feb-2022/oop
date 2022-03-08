@@ -1,20 +1,22 @@
-class Salad{
+import { FoodItem } from './FoodItem.js';
+
+class Salad extends FoodItem{
 
   constructor(type, weight) {
-    this.type = type;
+    super(type);
     this.weight = weight;
   }
 
   getName() {
-    return `${this.type.name} ${this.weight}gr`;
+    return `${super.getName()} ${this.weight}gr`;
   }
 
   calculatePrice() {
-    return this.type.price * this.weight / 100;
+    return super.calculatePrice() * this.weight / 100;
   }
 
   calculateCalories() {
-    return this.type.calories * this.weight / 100;
+    return super.calculateCalories() * this.weight / 100;
   }
 
 }
