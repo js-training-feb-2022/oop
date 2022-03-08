@@ -1,20 +1,6 @@
-class Beverage {
-  constructor(item) {
-    this.item = item;
-  }
+import { FoodItem } from './FoodItem.js';
 
-  getName() {
-    return this.item.name;
-  }
-
-  calculatePrice() {
-    return this.item.price;
-  }
-
-  calculateCalories() {
-    return this.item.calories;
-  }  
-};
+class Beverage extends FoodItem {};
 
 Beverage.COLA = {
   name: 'Cola',
