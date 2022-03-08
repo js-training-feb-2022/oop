@@ -1,19 +1,21 @@
+import { FoodItem } from './FoodItem.js';
+
 class Hamburger {
   constructor(size, stuffing) {
-    this.size = size;
-    this.stuffing = stuffing;
+    this.size = new FoodItem(size);
+    this.stuffing = new FoodItem(stuffing);
   }
 
   getName() {
-    return `${this.size.name} hamburger with ${this.stuffing.name}`;
+    return `${this.size.getName()} hamburger with ${this.stuffing.getName()}`;
   }
 
   calculatePrice() {
-    return this.size.price + this.stuffing.price;
+    return this.size.calculatePrice() + this.stuffing.calculatePrice();
   }
 
   calculateCalories() {
-    return this.size.calories + this.stuffing.calories;
+    return this.size.calculateCalories() + this.stuffing.calculateCalories();
   }
 
 }
