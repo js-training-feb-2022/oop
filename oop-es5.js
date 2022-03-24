@@ -1,3 +1,52 @@
+const menu = {
+    "hamburger": {
+        "size": {
+            "small": {
+                "price": 50,
+                "calories": 20
+            },
+            "big": {
+                "price": 100,
+                "calories": 40
+            }
+        },
+        "stuffing": {
+            "cheese": {
+                "price": 10,
+                "calories": 20
+            },
+            "salad": {
+                "price": 20,
+                "calories": 5
+            },
+            "potato": {
+                "price": 50,
+                "calories": 20
+            }
+        }
+    },
+    "salad": {
+        "caesar": {
+            "price": 100,
+            "calories": 20
+        },
+        "olivier": {
+            "price": 50,
+            "calories": 80
+        }
+    },
+    "drink": {
+        "coffee": {
+            "price": 80,
+            "calories": 20
+        },
+        "cola": {
+            "price": 50,
+            "calories": 40
+        }
+    }
+}
+
 function PriceAndCaloricity(price, caloricity) {
     this.price = price;
     this.caloricity = caloricity;
@@ -5,24 +54,24 @@ function PriceAndCaloricity(price, caloricity) {
 
 PriceAndCaloricity.prototype.calculate = function (PriceOrCaloricity) {
     let value;
-    if (this.kind === this.kind1) {
-        value = this['kind1props']()[PriceOrCaloricity];
-    } else if (this.kind === this.kind2) {
-        value = this['kind2props']()[PriceOrCaloricity];
+    if (this.kind === this.sizeKind) {
+        value = this['sizeProps']()[PriceOrCaloricity];
+    } else if (this.kind === this.stuffingKind) {
+        value = this['stuffingProps']()[PriceOrCaloricity];
     }
 
     return value;
 }
 
-function Meal(kind1, price1, cal1, kind2, price2, cal2) {
+function Meal(sizeKind, sizePrice, sizeCaloricity, stuffingKind, stuffingPrice, stuffingCaloricity) {
 
-    this.kind1 = kind1;
+    this.sizeKind = sizeKind;
 
-    this.kind2 = kind2;
+    this.stuffingKind = stuffingKind;
 
-    this['kind1props'] = () => new PriceAndCaloricity(price1, cal1);
+    this['sizeProps'] = () => new PriceAndCaloricity(sizePrice, sizeCaloricity);
 
-    this['kind2props'] = () => new PriceAndCaloricity(price2, cal2);
+    this['stuffingProps'] = () => new PriceAndCaloricity(stuffingPrice, stuffingCaloricity);
 }
 
 Meal.prototype = Object.create(PriceAndCaloricity.prototype);
@@ -31,33 +80,42 @@ Meal.prototype.getKind = function () {
     return this.kind;
 }
 
-function Hamburger(kind, stuffing) {
+function Hamburger(kind, stuffing) {    
+    let size = menu.hamburger.size;
+    let stuff = menu.hamburger.stuffing;
 
-    Meal.call(this, 'маленький', 50, 20, 'большой', 100, 40);
+    Meal.call(this, 'small', size.small.price, size.small.calories, 'big', size.big.price, size.small.calories);
 
     this.kind = kind;
 
     this.stuffing = stuffing;
 
-    this.STUFFING_CHEESE = () => new PriceAndCaloricity(10, 20);
+    this.STUFFING_CHEESE = () => new PriceAndCaloricity(stuff.cheese.price, stuff.cheese.calories);
 
-    this.STUFFING_SALAD = () => new PriceAndCaloricity(20, 5);
+    this.STUFFING_SALAD = () => new PriceAndCaloricity(stuff.salad.price, stuff.salad.calories);
 
-    this.STUFFING_POTATO = () => new PriceAndCaloricity(15, 10);
+    this.STUFFING_POTATO = () => new PriceAndCaloricity(stuff.potato.price, stuff.potato.calories);
 
 }
 
 Hamburger.prototype = Object.create(Meal.prototype);
 
+Hamburger.prototype.constructor = Hamburger;
+
 Hamburger.prototype.calculateHamburger = function (PriceOrCaloricity) {
     let valueBystuffing;
-    if (this.stuffing === 'сыр') {
-        valueBystuffing = this.STUFFING_CHEESE()[PriceOrCaloricity]
-    } else if (this.stuffing === 'салат') {
-        valueBystuffing = this.STUFFING_SALAD()[PriceOrCaloricity]
-    } else if (this.stuffing === 'картофель') {
-        valueBystuffing = this.STUFFING_POTATO()[PriceOrCaloricity]
+    switch (this.stuffing) {
+        case 'cheese':
+            valueBystuffing = this.STUFFING_CHEESE()[PriceOrCaloricity];
+            break;
+        case 'salad':
+            valueBystuffing = this.STUFFING_SALAD()[PriceOrCaloricity];
+            break;
+        case 'potato':
+            valueBystuffing = this.STUFFING_POTATO()[PriceOrCaloricity];
+            break;
     }
+
     return this.calculate(PriceOrCaloricity) + valueBystuffing;
 }
 
@@ -66,8 +124,10 @@ Hamburger.prototype.getStuffing = function () {
 }
 
 function Salad(kind, mass) {
+    let caesar = menu.salad.caesar;
+    let olivier = menu.salad.olivier;
 
-    Meal.call(this, 'Цезарь', 100, 20, 'Оливье', 50, 80)
+    Meal.call(this, 'caesar', caesar.price, caesar.calories, 'olivier', olivier.price, olivier.calories)
 
     this.kind = kind;
 
@@ -77,12 +137,17 @@ function Salad(kind, mass) {
 Salad.prototype = Object.create(Meal.prototype);
 
 Salad.prototype.calculateSalad = function (PriceOrCaloricity) {
-    return this.mass / 100 * this.calculate(PriceOrCaloricity);
+    let hundredPercent = 100;
+
+    return this.mass / hundredPercent * this.calculate(PriceOrCaloricity);
 }
 
 function Drink(kind) {
+    let cola = menu.drink.cola;
+    let coffee = menu.drink.cola;
+    let drinkArgs = [this, 'cola', cola.price, cola.calories, 'coffee', coffee.price, coffee.calories]
 
-    Meal.call(this, 'Кола', 50, 40, 'Кофе', 80, 20)
+    Meal.call(...drinkArgs)
 
     this.kind = kind;
 }
@@ -109,7 +174,7 @@ Order.prototype.calculateOrder = function (PriceOrCaloricity) {
 }
 
 Order.prototype.addPosition = function (position) {
-    if (this.editable === true) {
+    if (this.editable) {
         this.array.push(position);
         return `Вы добавили ${position.kind}`;
     } else {
@@ -119,7 +184,7 @@ Order.prototype.addPosition = function (position) {
 }
 
 Order.prototype.removePosition = function (position) {
-    if (this.editable === true) {
+    if (this.editable) {
         if (this.array.includes(position)) {
             this.array.splice(this.array.indexOf(position), 1);
             return `Вы удалили ${position.kind}`;
@@ -133,7 +198,7 @@ Order.prototype.removePosition = function (position) {
 }
 
 Order.prototype.pay = function () {
-    if (this.editable === true) {
+    if (this.editable) {
         this.editable = false;
         return 'Оплата прошла успешно';
     } else {
@@ -142,19 +207,19 @@ Order.prototype.pay = function () {
 
 }
 
-let hamburger1 = new Hamburger('маленький', 'картофель');
+let hamburger1 = new Hamburger('small', 'potato');
 console.log(hamburger1.getKind());
 console.log(hamburger1.getStuffing());
 console.log(hamburger1.calculateHamburger('price'));
 console.log(hamburger1.calculateHamburger('caloricity'));
 
-let salad1 = new Salad('Цезарь', 150);
+let salad1 = new Salad('caesar', 150);
 console.log(salad1.getKind());
 console.log(salad1.calculateSalad('price'));
 console.log(salad1.calculateSalad('caloricity'));
-let salad2 = new Salad('Оливье', 50);
+let salad2 = new Salad('olivier', 50);
 
-let drink1 = new Drink('Кола');
+let drink1 = new Drink('cola');
 console.log(drink1.getKind());
 console.log(drink1.calculate('price'));
 console.log(drink1.calculate('caloricity'));
